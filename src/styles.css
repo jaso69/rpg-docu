@@ -84,6 +84,24 @@ nav a:hover {
     color: var(--accent);
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-white {
+    color: white;
+}
+
+.textLogin{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: auto 0;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
 .hero {
     padding: 4rem 0;
     text-align: center;
