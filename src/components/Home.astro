@@ -1,0 +1,58 @@
+---
+import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/astro/components'
+---
+</style>
+<main>
+     <section class="hero">
+        <div class="container">
+            <h2>Portal de Documentación Técnica</h2>
+            <p>Acceda a manuales, especificaciones técnicas y recursos exclusivos para clientes de RPG Audiovisuales</p>
+            
+            <div class="login-box">
+                <SignedOut>
+                    <h3>Acceso de Clientes</h3>
+                    <div class="flex mx-auto justify-center border rounded-xl px-4 py-2 text-3xl font-bold text-blue-300 hover:bg-blue-500 transition">
+                        <SignInButton mode='modal' class='cursor-pointer text-white'>Login</SignInButton>
+                    </div>
+                </SignedOut>
+                <SignedIn>
+                    <div class="flex mx-auto justify-center px-4 py-2">
+                        <UserButton showName></UserButton>
+                    </div>
+                </SignedIn>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <a href="/docu">
+            <h2 class="section-title">Recursos Técnicos Disponibles</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Manuales de Equipos</h3>
+                    <p>Documentación técnica completa de todos nuestros equipos audiovisuales</p>
+                </div>
+            </a>
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Guías de Instalación</h3>
+                    <p>Procedimientos detallados para configurar sistemas audiovisuales</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Soporte Técnico</h3>
+                    <p>Acceso a bases de conocimiento y tickets de soporte especializado</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Especificaciones Técnicas</h3>
+                    <p>Detalles técnicos, diagramas y planos para integración de sistemas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
