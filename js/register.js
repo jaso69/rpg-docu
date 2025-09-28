@@ -159,7 +159,6 @@ class RegistrationManager {
         
         // Guardar token y redirigir
         this.saveAuthData(result.token, result.user);
-        
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 2000);
