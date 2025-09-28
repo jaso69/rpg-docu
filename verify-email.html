@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Email</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Verificación de Email</h1>
+        
+        <!-- Este elemento debe existir -->
+        <p>Se ha enviado un código de verificación a: <span id="userEmail"></span></p>
+        
+        <form id="verifyForm">
+            <div class="code-inputs">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]">
+            </div>
+            
+            <button type="submit" id="verifyBtn">Verificar Código</button>
+        </form>
+        
+        <!-- Contenedor para mensajes -->
+        <div id="messageContainer"></div>
+        
+        <p><a href="resend-code.html">¿No recibiste el código? Reenviar</a></p>
+    </div>
+
+    <script src="./js/verify.js"></script>
+</body>
+</html>

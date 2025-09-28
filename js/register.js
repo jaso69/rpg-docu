@@ -160,7 +160,9 @@ class RegistrationManager {
         // Guardar token y redirigir
         this.saveAuthData(result.token, result.user);
         setTimeout(() => {
-            window.location.href = 'index.html';
+             localStorage.setItem('registerEmail', result.user.email);
+            // Redirigir a verificación
+            window.location.href = `/verify-email.html?email=${encodeURIComponent(result.user.email)}`;
         }, 2000);
     }
 
