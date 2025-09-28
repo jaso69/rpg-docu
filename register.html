@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - RPG Audiovisuales</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .password-strength {
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .password-strength.weak {
+            background: #ef4444;
+            width: 33%;
+        }
+        
+        .password-strength.medium {
+            background: #f59e0b;
+            width: 66%;
+        }
+        
+        .password-strength.strong {
+            background: #10b981;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg flex flex-col">
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 bg-[#1a365d] text-white">
+        <div class="flex items-center justify-between w-full">
+            <div class="flex items-center space-x-4 text-sm md:text-lg">
+                <h1>RPG Audiovisuales</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li>
+                        <a href="index.html" class="text-white hover:underline">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Header Section -->
+            <div class="text-center">
+                <h2 class="mt-6 text-4xl font-extrabold text-white">
+                    Registro de Clientes
+                </h2>
+                <p class="mt-3 text-lg text-blue-100">
+                    Cree su cuenta para acceder a la documentación técnica
+                </p>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="glass-effect rounded-2xl shadow-2xl p-8">
+                <h3 class="text-2xl font-bold text-gray-900 text-center mb-8">
+                    Crear Cuenta
+                </h3>
+
+                <!-- Messages Container -->
+                <div id="messageContainer" class="mb-6"></div>
+
+                <form id="registerForm" class="space-y-6">
+                    <!-- Name Field -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                            Nombre Completo *
+                        </label>
+                        <input 
+                            id="name" 
+                            name="name" 
+                            type="text" 
+                            required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                            placeholder="Ingrese su nombre completo"
+                        >
+                    </div>
+
+                    <!-- Company Field -->
+                    <div>
+                        <label for="company" class="block text-sm font-medium text-gray-700 mb-2">
+                            Empresa (Opcional)
+                        </label>
+                        <input 
+                            id="company" 
+                            name="company" 
+                            type="text" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                            placeholder="Nombre de su empresa"
+                        >
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email *
+                        </label>
+                        <input 
+                            id="email" 
+                            name="email" 
+                            type="email" 
+                            required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                            placeholder="su@email.com"
+                        >
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Contraseña *
+                        </label>
+                        <input 
+                            id="password" 
+                            name="password" 
+                            type="password" 
+                            required 
+                            minlength="6"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                            placeholder="Mínimo 6 caracteres"
+                        >
+                        <div id="passwordStrength" class="password-strength"></div>
+                        <p class="text-xs text-gray-500 mt-1" id="passwordHint"></p>
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">
+                            Confirmar Contraseña *
+                        </label>
+                        <input 
+                            id="confirmPassword" 
+                            name="confirmPassword" 
+                            type="password" 
+                            required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                            placeholder="Repita su contraseña"
+                        >
+                        <p class="text-xs text-gray-500 mt-1" id="passwordMatch"></p>
+                    </div>
+
+                    <!-- Terms Checkbox -->
+                    <div class="flex items-center">
+                        <input 
+                            id="terms" 
+                            name="terms" 
+                            type="checkbox" 
+                            required
+                            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        >
+                        <label for="terms" class="ml-2 block text-sm text-gray-700">
+                            Acepto los <a href="#" class="text-blue-600 hover:text-blue-500 font-medium">términos de servicio</a> 
+                            y la <a href="#" class="text-blue-600 hover:text-blue-500 font-medium">política de privacidad</a>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        id="submitBtn"
+                        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                    >
+                        Crear Cuenta
+                    </button>
+                </form>
+
+                <!-- Login Link -->
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">
+                        ¿Ya tiene cuenta? 
+                        <a href="index.html" class="font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200">
+                            Iniciar Sesión
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-10 text-white py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 RPG Audiovisuales. Todos los derechos reservados.</p>
+            <p class="text-blue-100 mt-2">Portal de Documentación Técnica</p>
+        </div>
+    </footer>
+
+    <script src="./js/register.js"></script>
+</body>
+</html>

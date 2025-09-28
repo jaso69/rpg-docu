@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RPG Audiovisuales</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="hidden">
+    <header class="flex items-center justify-between p-4 bg-[#1a365d] text-white">
+        <div class="flex items-center justify-between w-full">
+            <div class="flex items-center space-x-4 text-sm md:text-lg">
+                <h1>RPG Audiovisuales</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><span id="userWelcome"></span></li>
+                    <li><button onclick="window.authClient.handleLogout()">Cerrar Sesión</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="flex flex-col gap-6 justify-center items-center">
+            <div class="flex flex-col gap-6 justify-center items-center">
+                <h2 class="text-xl font-bold mt-10">Documentación Técnica - Administración</h2>
+                <div class="w-full max-w-4xl p-6 bg-gray-100 rounded shadow">
+                    <div class="flex flex-col gap-4 mb-4">
+                        <!-- <input class="border px-4 py-2 rounded" type="text" id="newRol" placeholder="admin" /> -->
+                        <select id="newRol" name="role" class="border px-4 py-2 rounded">
+                            <option value="norole">Selecciona un rol</option>
+                            <option value="guest">Invitado</option>
+                            <option value="user">Usuario</option>
+                            <option value="moderator">Moderador</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                        <input class="border px-4 py-2 rounded" type="text" id="email" placeholder="email@email.com" />
+                        <button 
+                            type="button" 
+                            id="updatedButton"
+                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                            >
+                            Subir Documento
+                        </button>                   
+                    </div><!-- Aquí cargarías los documentos dinámicamente -->
+                </div>
+            </div>
+        </section>
+        <section>
+            <div id="message" class="mt-4 text-center">
+
+            </div>
+        </section>
+    </main>
+
+    <script src="./js/main.js" type="module"></script> 
+    <script src="./js/dashboard.js" type="module"></script>
+    <script src="./js/update.js" type="module"></script>
+</body>
+</html>

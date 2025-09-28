@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RPG Audiovisuales</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="hidden">
+    <header>
+        <div>
+            <div class="header-content">
+                <div class="logo">
+                    <h1>RPG Audiovisuales - Dashboard</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><span id="userWelcome"></span></li>
+                        <li><button onclick="window.authClient.handleLogout()">Cerrar Sesión</button></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <h2>Documentación Técnica Disponible</h2>
+            <div class="documents-grid">
+                <!-- Aquí cargarías los documentos dinámicamente -->
+            </div>
+        </div>
+        <div id="adminPanel" style="display:none; margin-top: 20px;">
+            <h3>Panel de Administración</h3>
+            <a href="./update.html">Ir al Panel de Administración</a>
+        </div>
+        <br>
+    </section>
+
+    <script src="./js/main.js" type="module"></script>
+    <script src="./js/dashboard.js" type="module"></script>
+</body>
+</html>
