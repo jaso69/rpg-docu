@@ -4,39 +4,321 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - RPG Audiovisuales</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="hidden">
-    <header>
-        <div>
-            <div class="header-content">
-                <div class="logo">
+<body class="hidden bg-gray-900 text-white">
+    <header class="flex bg-[#1a365d] shadow-md text-white p-4">
+        <div class="w-full">
+            <div class="flex justify-between items-center">
+                <!-- Logo a la IZQUIERDA -->
+                <div class="text-xl font-bold">
                     <h1>RPG Audiovisuales - Dashboard</h1>
                 </div>
+                
+                <!-- Menú a la DERECHA -->
                 <nav>
-                    <ul>
+                    <ul class="flex items-center space-x-4">
+                        <li>Documentación</li>
+                        <li>Software</li>
+                        <li>
+                            <button 
+                            onclick="window.authClient.handleLogout()" 
+                            class="hover:bg-red-700 px-4 py-2 rounded-lg transition duration-200"
+                            >
+                            Cerrar Sesión
+                            </button>
+                        </li>
                         <li><span id="userWelcome"></span></li>
-                        <li><button onclick="window.authClient.handleLogout()">Cerrar Sesión</button></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-    <section class="dashboard">
-        <div class="container">
-            <h2>Documentación Técnica Disponible</h2>
-            <div class="documents-grid">
-                <!-- Aquí cargarías los documentos dinámicamente -->
+    <main class="flex flex-col items-center min-h-screen p-4">
+        
+            <h2 class="text-2xl font-bold mt-6">Documentación Técnica Disponible</h2>
+
+        <div class="flex gap-x-6 flex-wrap justify-center bg-gray-900 items-center mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Software COEX VMP
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual Software COEX VMP
+                    </p>
+                
+                    <a href="https://telefonica.rpg-docu.com/manuales/manualVMP.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
             </div>
+        
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Novastar MX40 Pro
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual Novastar MX40 Pro
+                    </p>
+                
+                    <a href="https://telefonica.rpg-docu.com/manuales/mx40.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual Midas HD-96 24
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual mesa de mezclas Midas HD-96 24
+                    </p>
+                
+                    <a href="https://telefonica.rpg-docu.com/manuales/hd-96.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual Midas DL-251
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual Midas DL-251 Stage Box
+                    </p>
+                
+                    <a href="https://telefonica.rpg-docu.com/manuales/dl251.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual KLARK TEKNIK DM8008
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual KLARK TEKNIK DM8008 OUTPUT BOX
+                    </p>
+                
+                    <a href="https://telefonica.rpg-docu.com/manuales/DM8008.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual KLARK TEKNIK DM8500
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual KLARK TEKNIK DM8500 DSP
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/DM8500.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual LAB GRUPPEN D10:4-D20:4
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual LAB GRUPPEN D10:4-D20:4 AMPLIFIERS
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/d20-10.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual LAKE CONTROLLER
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual LAKE CONTROLLER OPERATION
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/LakeController.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual TANOY VX Series
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual TANOY VX Series LOUDSPEAKERS
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/vx.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual YAMAHA TF-1
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual mesa de mezclas YAMAHA TF-1
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/tf1.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual BIAMP REVAMP2600
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual BIAMP REVAMP2600 AMPLIFIERS
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/revamp2600.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual BIAMP CM20DT
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual BIAMP CM20DT LOUDSPEAKERS
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/cm20dt.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual Blackmagic Videohub 40x40
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual Blackmagic Videohub 40x40 12G
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/40x40.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual Blackmagic Converters
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual Blackmagic Converters
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/hdmitosdi.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual CRESTRON UC Solutions
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual CRESTRON UC Solutions
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/uc.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual OBSIDIAN NX1
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual OBSIDIAN NX1 Lighting Controller
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/nx1.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual ELATION KL FRESNEL 8 FC
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual ELATIION KL FRESNEL 8 FC
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/FRESNEL8FC.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual ELATION FUZE PROFILE
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual ELATIION FUZE PROFILE
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/FuzeProfile.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
+            <div class="flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+                <div class="p-4">
+                    <h5 class="mb-2 text-slate-800 text-xl font-semibold">
+                    Manual ELATION FUZE WASH 500
+                    </h5>
+                    <p class="text-slate-600 leading-normal font-light mb-4">
+                    Manual ELATIION FUZE WASH 500
+                    </p>
+                    <a href="https://telefonica.rpg-docu.com/manuales/FUZEWASH500.pdf" target="_blank" class="rounded-md bg-slate-800 py-2 px-4 mt-6 border border-transparent text-center text-sm text-white hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Download
+                    </a>
+                </div>               
+            </div>
+
         </div>
+
         <div id="adminPanel" style="display:none; margin-top: 20px;">
-            <h3>Panel de Administración</h3>
-            <a href="./update.html">Ir al Panel de Administración</a>
+            <h3>Administracion de usuarios</h3>
+            <a href="./update.html">Ir a Administracion de usuarios</a>
         </div>
-        <br>
-    </section>
+    </main>
 
     <script src="./js/main.js" type="module"></script>
     <script src="./js/dashboard.js" type="module"></script>

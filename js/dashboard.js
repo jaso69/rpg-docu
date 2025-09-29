@@ -10,14 +10,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = '/index.html';
         return;
     }
-    if (window.authClient.isAuthenticated()) {
-        document.body.classList.remove('hidden');
-    }
     // Cargar datos del usuario
     const user = window.authClient.getCurrentUser();
+    
+    if (user.isVerified && user.rol === 'admin') {
+        document.body.classList.remove('hidden');
+    }
+
     if (user) {
         document.getElementById('userWelcome').textContent = `${user.name || user.email}`;
     }
+
+    if (!user.isVerified) {
+        window.location.href = './verify-email.html';
+    }
+
     if(user.rol === 'guest'){
         window.location.href = './guest.html';
     }
@@ -25,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (user && user.rol === 'admin') {
         document.getElementById('adminPanel').style.display = 'block';
     }
-
+    console.log(user)
     // Cargar documentos técnicos (aquí integrarías con tu API)
     loadTechnicalDocuments();
 });

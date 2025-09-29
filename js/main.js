@@ -88,6 +88,9 @@ class AuthClient {
         this.showMessage(`¡Bienvenido ${result.user.name || result.user.email}!`, 'success');
     } catch (error) {
         this.showMessage(error.message, 'error');
+        if (error.message.includes('verifica')) {
+            window.location.href = 'verify-email.html';
+        }
     } finally {
         this.setButtonState(submitBtn, false, 'Acceder a la Documentación');
     }
