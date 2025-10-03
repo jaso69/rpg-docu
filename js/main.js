@@ -4,6 +4,9 @@ const API_BASE = 'https://auth-service-eight-mocha.vercel.app/api';
 // Cliente de autenticación
 let authChecked = false;
 class AuthClient {
+    
+    loading = document.getElementById('loading');
+
     constructor() {
         this.currentUser = null;
         this.init();
@@ -80,6 +83,7 @@ class AuthClient {
     this.setButtonState(submitBtn, true, 'Accediendo...');
 
     try {
+        loading.classList.remove('hidden');
         const result = await this.login(username, password);
         
         // ✅ Ahora SÍ redirigir después del login
@@ -109,9 +113,10 @@ class AuthClient {
         const data = await response.json();
 
         if (!response.ok) {
+            loading.classList.add('hidden');
             throw new Error(data.error || 'Error en el login');
         }
-
+        
         if (data.success) {
             // Guardar token y datos del usuario
             this.saveAuthData(data.token, data.user);
@@ -156,6 +161,7 @@ class AuthClient {
     // Manejar autenticación exitosa
     // Manejar autenticación exitosa
 handleSuccessfulAuth(user, shouldRedirect = true) {
+    loading.classList.add('hidden');
     this.currentUser = user;
     
     // ✅ Actualizar UI para mostrar que está logueado
@@ -382,4 +388,4 @@ window.addEventListener('error', (event) => {
 });
 
 // Exportar para usar en otros archivos
-export default AuthClient;
+//export default AuthClient;

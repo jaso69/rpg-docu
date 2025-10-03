@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Documentación - RPG Audiovisuales</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .loading-spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mejora la apariencia del drag & drop */
+        .border-dashed:hover {
+            border-color: #3b82f6;
+            background-color: #f8fafc;
+}
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-[#1a365d] shadow-md text-white p-4">
+        <div class="w-full">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-video text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">RPG Audiovisuales</h1>
+                        <p class="text-blue-200 text-sm">Subir Documentación Técnica</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul class="flex items-center space-x-6">
+                        <li>
+                            <a href="search-documents.html" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition duration-200 flex items-center space-x-2">
+                                <i class="fas fa-search"></i>
+                                <span>Buscar Documentos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <span id="userWelcome" class="flex items-center space-x-2 bg-blue-700 px-4 py-2 rounded-lg">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="userName">Usuario</span>
+                            </span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto p-6">
+        <!-- Título -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Subir Documentación Técnica</h2>
+            <p class="text-gray-600">Agrega manuales, especificaciones y diagramas a la base de datos</p>
+        </div>
+
+        <!-- Formulario de Subida -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <form id="uploadForm" class="space-y-6">
+                <!-- Información Básica -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Marca -->
+                    <div>
+                        <label for="brand" class="block text-sm font-medium text-gray-700 mb-2">
+                            Marca <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="brand" 
+                            required
+                            placeholder="Ej: Sony, Canon, Behringer..."
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                    </div>
+
+                    <!-- Modelo -->
+                    <div>
+                        <label for="model" class="block text-sm font-medium text-gray-700 mb-2">
+                            Modelo <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="model" 
+                            required
+                            placeholder="Ej: PXW-FS7, C300 Mark II, X32..."
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                    </div>
+                </div>
+
+                <!-- Nombre del Documento -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                        Nombre del Documento <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        required
+                        placeholder="Ej: Manual de Usuario, Especificaciones Técnicas..."
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                </div>
+
+                <!-- Tipo y Categoría -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Tipo -->
+                    <div>
+                        <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
+                            Tipo de Documento <span class="text-red-500">*</span>
+                        </label>
+                        <select 
+                            id="type" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                            <option value="">Selecciona un tipo</option>
+                            <option value="manual">Manual de Usuario</option>
+                            <option value="specs">Especificaciones Técnicas</option>
+                            <option value="diagram">Diagrama de Conexiones</option>
+                            <option value="firmware">Firmware/Software</option>
+                            <option value="guide">Guía Rápida</option>
+                        </select>
+                    </div>
+
+                    <!-- Categoría -->
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+                            Categoría <span class="text-red-500">*</span>
+                        </label>
+                        <select 
+                            id="category" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                            <option value="">Selecciona una categoría</option>
+                            <option value="camara">Cámara</option>
+                            <option value="audio">Audio</option>
+                            <option value="iluminacion">Iluminación</option>
+                            <option value="video">Video</option>
+                            <option value="streaming">Streaming</option>
+                            <option value="accesorio">Accesorio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Descripción -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                        Descripción
+                    </label>
+                    <textarea 
+                        id="description" 
+                        rows="3"
+                        placeholder="Describe brevemente el contenido del documento..."
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    ></textarea>
+                </div>
+
+                <!-- Palabras Clave -->
+                <div>
+                    <label for="keywords" class="block text-sm font-medium text-gray-700 mb-2">
+                        Palabras Clave
+                    </label>
+                    <input 
+                        type="text" 
+                        id="keywords" 
+                        placeholder="Ej: 4K, XAVC, super35, lentes E-mount (separadas por comas)"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                    <p class="text-sm text-gray-500 mt-1">Separa las palabras clave con comas. Ayudarán en las búsquedas.</p>
+                </div>
+
+                <!-- Subida de Archivo -->
+                <div>
+                    <label for="file" class="block text-sm font-medium text-gray-700 mb-2">
+                        Archivo PDF <span class="text-red-500">*</span>
+                    </label>
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
+                        <div class="space-y-1 text-center">
+                            <i class="fas fa-cloud-upload-alt text-gray-400 text-4xl mx-auto"></i>
+                            <div class="flex text-sm text-gray-600">
+                                <label for="file" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                                    <span>Selecciona un archivo</span>
+                                    <input 
+                                        id="file" 
+                                        name="file" 
+                                        type="file" 
+                                        accept=".pdf,.doc,.docx"
+                                        required
+                                        class="sr-only"
+                                    >
+                                </label>
+                                <p class="pl-1">o arrastra y suelta</p>
+                            </div>
+                            <p class="text-xs text-gray-500">PDF, DOC, DOCX hasta 10MB</p>
+                            <p id="fileName" class="text-sm text-green-600 font-medium hidden"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="flex justify-end space-x-4">
+                    <button 
+                        type="button" 
+                        onclick="window.history.back()"
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition duration-200 flex items-center space-x-2"
+                    >
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button 
+                        type="submit" 
+                        id="submitBtn"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-200 flex items-center space-x-2"
+                    >
+                        <i class="fas fa-upload"></i>
+                        <span>Subir Documento</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Mensajes -->
+        <div id="messageContainer"></div>
+
+        <!-- Loading -->
+        <div id="loading" class="hidden text-center py-8">
+            <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
+            <p class="text-gray-600">Subiendo documento...</p>
+        </div>
+    </div>
+    <!-- <script src="./js/dashboard.js"></script> -->
+    <script src="./js/documents.js"></script>
+</body>
+</html>
