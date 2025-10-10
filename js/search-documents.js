@@ -340,13 +340,57 @@ class DocumentsManager {
         }
     }
 
-    downloadDocument(documentId) {
-        const doc = this.documents.find(d => d.id === documentId);
-        if (doc && doc.file_url) {
-            window.open(doc.file_url, '_blank');
-        } else {
-            this.showToast('No se puede descargar el documento', 'error');
+    // En search-documents.js - reemplaza el método downloadDocument
+async downloadDocument(documentId) {
+    console.log('📥 INICIANDO DESCARGA CON NUEVO MÉTODO');
+    console.log('🔍 documentId:', documentId);
+    
+    const token = localStorage.getItem('rpg_auth_token');
+    if (!token) {
+        alert('No estás autenticado');
+        return;
+    }
+
+    console.log('documentId recibido:', documentId);
+    try {
+        // ✅ URL CORRECTA - sin .js y con parámetros correctos
+        const url = `https://auth-service-eight-mocha.vercel.app/api/documents.js?download=true&documentId=${documentId}`;
+        console.log('🌐 URL completa:', url);
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log('📡 Estado HTTP:', response.status);
+        console.log('📡 OK:', response.ok);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Error HTTP:', errorText);
+            alert('Error del servidor: ' + response.status);
+            return;
         }
+
+        const data = await response.json();
+        console.log('📊 Respuesta del servidor:', data);
+
+        if (data.success && data.signedUrl) {
+            console.log('✅ URL firmada recibida, abriendo...');
+            window.open(data.signedUrl, '_blank');
+        } else {
+            console.error('❌ Error en la respuesta:', data);
+            alert(data.error || 'Error al generar la descarga');
+        }
+
+    } catch (error) {
+        console.error('❌ Error de conexión:', error);
+        alert('Error de conexión: ' + error.message);
+    }
+
     }
 
     editDocument(documentId) {

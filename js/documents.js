@@ -1,4 +1,4 @@
-// upload-documents.js - VERSIÓN CORREGIDA PARA R2
+// upload-documents.js - VERSIÓN CORREGIDA PARA R2 CON DESCARGA
 class DocumentUpload {
     constructor() {
         this.API_BASE = 'https://auth-service-eight-mocha.vercel.app/api';
@@ -165,23 +165,124 @@ class DocumentUpload {
         // Agregar datos y archivo al FormData
         formData.append('document', JSON.stringify(documentData));
         formData.append('file', file);
-
-        // ✅ CORREGIDO: Endpoint sin .js
-        const response = await fetch(`${this.API_BASE}/documents.js`, {
-            method: 'POST',
+        const form = documentData;
+        const response = await fetch(`${this.API_BASE}/upload-url.js?fileType=' + encodeURIComponent(file.type)`, {
+            method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
                 // No Content-Type para FormData - el navegador lo establece automáticamente
             },
-            body: formData
         });
+
+        const { signedUrl, publicUrl, key, documentId } = await response.json();
+
+        const putRes = await fetch(signedUrl, {
+            method: 'PUT',
+            headers: { 'Content-Type': file.type },
+            body: file
+        });
+
+        const meta = {
+            name: form.name,
+            brand: form.brand,
+            model: form.model,
+            file_url: publicUrl,
+            file_name: file.name,
+            file_size: file.size,
+            file_type: file.type
+        };
+
+        const res2 = await fetch(`${this.API_BASE}/documents.js`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(meta)
+        });
+        const data = await res2.json();
+        console.log(data)
+        if (!putRes.ok) throw new Error('Falló la subida a R2');
 
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.error || 'Error al subir el documento');
         }
 
-        return await response.json();
+        return await data;
+    }
+
+
+// Método fallback con URL pública
+async tryPublicUrlFallback(documentId) {
+    try {
+        console.log('🔄 Intentando fallback con URL pública...');
+        
+        const document = await this.getDocumentInfo(documentId);
+        if (document && document.file_url) {
+            console.log('🔗 Usando URL pública como fallback:', document.file_url);
+            window.open(document.file_url, '_blank');
+            this.showMessage('Descarga iniciada (URL pública)', 'info');
+        }
+    } catch (fallbackError) {
+        console.error('❌ Fallback también falló:', fallbackError);
+    }
+}
+
+    // 🔽 MÉTODO AUXILIAR PARA OBTENER INFORMACIÓN DEL DOCUMENTO
+    async getDocumentInfo(documentId) {
+        const token = localStorage.getItem('rpg_auth_token');
+        
+        const response = await fetch(`${this.API_BASE}/documents.js`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error ${response.status} al obtener documentos`);
+        }
+
+        const data = await response.json();
+        
+        if (data.success && data.documents) {
+            // Buscar el documento específico por ID
+            const document = data.documents.find(doc => doc.id === documentId);
+            return document || null;
+        }
+        
+        return null;
+    }
+
+    // 🔽 MÉTODO PARA DESCARGAR DIRECTAMENTE DESDE URL (más simple)
+    downloadDocumentFromURL(fileUrl, fileName = 'documento') {
+        if (!fileUrl) {
+            this.showMessage('URL del documento no disponible', 'error');
+            return;
+        }
+
+        try {
+            console.log('📥 Descargando desde URL:', fileUrl);
+            
+            // Crear un enlace temporal para la descarga
+            const link = document.createElement('a');
+            link.href = fileUrl;
+            link.target = '_blank';
+            link.download = fileName;
+            
+            // Simular click para iniciar descarga
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            this.showMessage('Descarga iniciada', 'success');
+            
+        } catch (error) {
+            console.error('Error en descarga directa:', error);
+            this.showMessage('Error al descargar: ' + error.message, 'error');
+        }
     }
 
     parseKeywords(keywordsString) {
@@ -277,6 +378,59 @@ class DocumentUpload {
                 `<span class="loading-spinner"></span> ${text}` : 
                 `<i class="fas fa-upload"></i><span>${text}</span>`;
         }
+    }
+
+    // En tu search-documents.js - USA ESTE MÉTODO EXACTO
+async downloadDocument(documentId) {
+    console.log('📥 INICIANDO DESCARGA CON NUEVO MÉTODO');
+    console.log('🔍 documentId:', documentId);
+    
+    const token = localStorage.getItem('rpg_auth_token');
+    if (!token) {
+        alert('No estás autenticado');
+        return;
+    }
+
+    console.log('documentId recibido:', documentId);
+    try {
+        // ✅ URL CORRECTA - sin .js y con parámetros correctos
+        const url = `https://auth-service-eight-mocha.vercel.app/api/documents.js?download=true&documentId=${documentId}`;
+        console.log('🌐 URL completa:', url);
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log('📡 Estado HTTP:', response.status);
+        console.log('📡 OK:', response.ok);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Error HTTP:', errorText);
+            alert('Error del servidor: ' + response.status);
+            return;
+        }
+
+        const data = await response.json();
+        console.log('📊 Respuesta del servidor:', data);
+
+        if (data.success && data.signedUrl) {
+            console.log('✅ URL firmada recibida, abriendo...');
+            window.open(data.signedUrl, '_blank');
+        } else {
+            console.error('❌ Error en la respuesta:', data);
+            alert(data.error || 'Error al generar la descarga');
+        }
+
+    } catch (error) {
+        console.error('❌ Error de conexión:', error);
+        alert('Error de conexión: ' + error.message);
+    }
+
     }
 }
 
